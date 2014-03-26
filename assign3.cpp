@@ -48,55 +48,26 @@ int main()
 {
 	int N;
 	cin >> N;
-	cout << "N: " << N << endl;
+	// cout << "N: " << N << endl;
 
 	for (int i = 0; i < N; i++)
 	{
-		int number = 0, count = 0, len = 0;
+		int number = 0, count = 0;
 		cin >> number;
 		ReversibleInteger obj(number);
-		cout << "number: " << obj.getValue() << endl;
+		// cout << "number: " << obj.getValue() << endl;
 		ReversibleInteger reverseOfObj = obj.reverse();
-		cout << "Reverse number is: " << reverseOfObj.getValue() << endl;
+		// cout << "Reverse number is: " << reverseOfObj.getValue() << endl;
 		ReversibleInteger sumOfThem = obj.add(reverseOfObj);
-		cout << "Addition of org and rev: " << sumOfThem.getValue() << endl;
+		// cout << "Addition of org and rev: " << sumOfThem.getValue() << endl;
 
-	/*	//Number of digits which addition has, START!
-		int sum = obj.add(number, obj.reverse(number));
-		while(sum > 0) 
-		{
-			int digit = sum % 10; 
-			sum = sum / 10;
-			len++;
-		} //Number of digits which addition has, END!
-		cout << len << endl;
-
-		//Putting addition into arrays, START!
-		int count2 = len;
-		int sum2 = obj.add(number, obj.reverse(number));
-		int* arr = new int[len];
-		for (int a = 0; a < len; a++)
-		{
-			int ten = pow(10,(count2-1));
-			arr[a] = sum2 / ten;
-			cout << a << " : " << arr[a] << endl;
-			sum2 = sum2 % ten;
-			count2--;
-		} //Putting addition into arrays, END!
-		cout << "Len: " << len << endl;
-		
-		//BEK, PROBLEM STARTS HERE!
-		//If not palindrome, reverse again, START!
-		for (int a = 0; a < len / 2; a++)
-		{
-			while (arr[a] != arr[len - a - 1])
-			{
-				obj.add(obj.add(number, obj.reverse(number)), obj.reverse(obj.add(number, obj.reverse(number))));
-				count++;
-			}
-		} //If not palindrome, reverse again, END!
-		//BEK, UNTIL HERE, I GUESS!
-		cout << count << " " << obj.add(number, obj.reverse(number)) << endl;*/
+		do {
+			obj = obj.add(reverseOfObj);
+			reverseOfObj = obj.reverse();
+			count++;
+			// cout << obj.getValue() << endl;
+		} while (obj.getValue() != reverseOfObj.getValue());
+		cout << count << " " << obj.getValue() << endl;
 	}
 	return 0;
 }
