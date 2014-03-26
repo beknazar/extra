@@ -4,36 +4,48 @@
 
 using namespace std;
 
+#define MAXDIGITS 10
+
 class ReversibleInteger 
 {
 private:
-	int lastdigit;
+	char digits[MAXDIGITS]; /* represent the number */
+	int lastdigit; /* index of high-order digit */
+
 public:
-	int reverse(int num)
-	{
-		int revNum = 0;
-		while(num > 0) //Reversing the number
+
+	ReversibleInteger (int n=0) {
+		lastdigit = log10(n); // finding length - 1 of number; e.g. lastdigit for "786" = 2, "1000" = 3 ...
+		for (int i = 0; i <= lastdigit; i++)
 		{   
-			lastdigit = num % 10;
-			revNum = revNum * 10 + lastdigit; 
-			num = num / 10;
+			digits[lastdigit - i] = n % 10;
+			n = n / 10;
 		}
-		return revNum;
 	}
-	int add(int a, int b)
-	{
-		int sum = 0;
-		sum = a + b;
-		//cout << a << " + " << b << " = " << sum << endl;
-		return sum;
+	ReversibleInteger reverse() {
+		int len = lastdigit, revNum = 0;
+		for (int i = 0; i <= lastdigit; i++) {
+			revNum += digits[len] * pow(10, len--); // 786 -> 687
+		}
+		ReversibleInteger* rev = new ReversibleInteger(revNum);
+		return *rev;
 	}
-	int getValue();
+	ReversibleInteger add(ReversibleInteger arg) {
+		int sum = getValue() + arg.getValue();
+		ReversibleInteger* s = new ReversibleInteger(sum);
+		return *s;
+	}
+	int getValue() {
+		int value = 0, len = lastdigit;
+		for (int i = 0; i <= lastdigit; i++) {
+			value += digits[i] * pow(10, len--); // conversion from char to int
+		}
+		return value;
+	}
 };
 
 int main()
 {
-	ReversibleInteger obj;
-
 	int N;
 	cin >> N;
 	cout << "N: " << N << endl;
@@ -42,12 +54,14 @@ int main()
 	{
 		int number = 0, count = 0, len = 0;
 		cin >> number;
-		cout << "number: " << number << endl;
-		cout << "Reverse number is: " << obj.reverse(number) << endl;
-		
-		cout << "Addition of org and rev: " << obj.add(number, obj.reverse(number)) << endl;
+		ReversibleInteger obj(number);
+		cout << "number: " << obj.getValue() << endl;
+		ReversibleInteger reverseOfObj = obj.reverse();
+		cout << "Reverse number is: " << reverseOfObj.getValue() << endl;
+		ReversibleInteger sumOfThem = obj.add(reverseOfObj);
+		cout << "Addition of org and rev: " << sumOfThem.getValue() << endl;
 
-		//Number of digits which addition has, START!
+	/*	//Number of digits which addition has, START!
 		int sum = obj.add(number, obj.reverse(number));
 		while(sum > 0) 
 		{
@@ -82,7 +96,7 @@ int main()
 			}
 		} //If not palindrome, reverse again, END!
 		//BEK, UNTIL HERE, I GUESS!
-		cout << count << " " << obj.add(number, obj.reverse(number)) << endl;
+		cout << count << " " << obj.add(number, obj.reverse(number)) << endl;*/
 	}
 	return 0;
 }
