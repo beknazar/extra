@@ -3,7 +3,7 @@
  - 2014 (c) Arzubek Murtazaev
 
 ## Assignment N3 test:
-	*$g++ assign3.cpp && ./a.out < input *
+	$g++ assign3.cpp && ./a.out < input
 	4 9339
 	5 45254
 	3 6666
