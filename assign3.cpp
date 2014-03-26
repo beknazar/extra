@@ -27,13 +27,13 @@ public:
 		for (int i = 0; i <= lastdigit; i++) {
 			revNum += digits[len] * pow(10, len--); // 786 -> 687
 		}
-		ReversibleInteger* rev = new ReversibleInteger(revNum);
-		return *rev;
+		ReversibleInteger rev(revNum);
+		return rev;
 	}
 	ReversibleInteger add(ReversibleInteger arg) {
 		int sum = getValue() + arg.getValue();
-		ReversibleInteger* s = new ReversibleInteger(sum);
-		return *s;
+		ReversibleInteger s(sum);
+		return s;
 	}
 	int getValue() {
 		int value = 0, len = lastdigit;
