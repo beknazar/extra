@@ -1,5 +1,6 @@
-# This is c++ projects for Advanced Programming class
-
+# Collection of C++ projects
+2014 (c) Beknazar Abdikamalov
+2014 (c) Arzubek Murtazaev
 ## Assignment3 testing
 	2
 	N: 2
