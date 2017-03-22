@@ -1,6 +1,6 @@
 # Collection of C++ projects
- - 2014 (c) Beknazar Abdikamalov
- - 2014 (c) Arzubek Murtazaev
+ - 2014 (c) Bek Abdik
+ - 2014 (c) Alex Mur
 
 ## Assignment N3 test:
 	contents of file "input":
